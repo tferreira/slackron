@@ -3,6 +3,10 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+_TEST_REQUIRE = [
+    "pylint==2.4.1"
+]
+
 setuptools.setup(
     name="slackron",
     version="0.0.1",
@@ -16,6 +20,8 @@ setuptools.setup(
     install_requires=[
         "requests==2.22.0"
     ],
+    tests_require=_TEST_REQUIRE,
+    extras_require={"testing": _TEST_REQUIRE},
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
