@@ -5,8 +5,8 @@ from datetime import datetime
 
 
 class Runner():
-    def __init__(self, cmd_line, slack_client):
-        self._cmd_line = cmd_line
+    def __init__(self, cmd_line_args, slack_client):
+        self._cmd_line_args = cmd_line_args
         self._slack = slack_client
 
     def execute(self):
@@ -25,12 +25,12 @@ class Runner():
     def run_command(self):
         start_ts = time.time()
 
-        process = subprocess.run(
-            args=self._cmd_line,
-            shell=True,
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE
+        process = subprocess.Popen(
+            args=self._cmd_line_args,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
         )
+        stdout, stderr = process.communicate()
 
         end_ts = time.time()
 
@@ -38,8 +38,8 @@ class Runner():
             "start_ts": start_ts,
             "end_ts": end_ts,
             "code": process.returncode,
-            "stdout": process.stdout,
-            "stderr": process.stderr
+            "stdout": stdout,
+            "stderr": stderr
         }
 
         return results
@@ -48,7 +48,7 @@ class Runner():
                     stdout=None, stderr=None):
         report = [
             "**Cron report**",
-            "_Command_: {}".format(self._cmd_line),
+            "_Command_: {}".format(self._cmd_line_args),
             "_Started_: {}".format(
                 datetime.utcfromtimestamp(start_ts).strftime('%Y-%m-%d %H:%M:%S')
             ),

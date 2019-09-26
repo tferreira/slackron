@@ -15,7 +15,7 @@ def run():
     elif args[0] != delimiter:
         print("Bad delimiter. (Usage: slackron -- CMD)")
     else:
-        cmd_line = " ".join(map(shlex.quote, args[1:]))
+        cmd_line_args = list(map(shlex.quote, args[1:]))
 
         # load config file from home directory
         config = Config()
@@ -28,7 +28,7 @@ def run():
         )
 
         runner = Runner(
-            cmd_line=cmd_line,
+            cmd_line_args=cmd_line_args,
             slack_client=slack_client
         )
         runner.execute()
