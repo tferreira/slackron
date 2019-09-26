@@ -9,13 +9,14 @@ _TEST_REQUIRE = [
 
 setuptools.setup(
     name="slackron",
-    version="0.0.1",
+    version="0.0.2",
     author="Thomas Ferreira",
     author_email="fulura@gmail.com",
     description="A Python wrapper to notify about cronjob execution to Slack",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/tferreira/slackron",
+    include_package_data=True,
     packages=setuptools.find_packages(),
     install_requires=[
         "PyYAML==5.1.2",
