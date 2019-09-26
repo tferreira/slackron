@@ -27,8 +27,8 @@ class Config:
 
     @property
     def username(self):
-        # if not specified, it will be slack default
-        return self._config['username'] if 'username' in self._config else None
+        # if not specified, it will be "Slackron"
+        return self._config['username'] if 'username' in self._config else "Slackron"
 
     @property
     def emoji(self):
