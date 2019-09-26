@@ -16,8 +16,8 @@ class Runner():
             start_ts=int(results['start_ts']),
             end_ts=int(results['end_ts']),
             status="OK" if results['code'] == 0 else "FAILED",
-            stdout=results['stdout'].decode(),
-            stderr=results['stderr'].decode()
+            stdout=results['stdout'],
+            stderr=results['stderr']
         )
 
         self._slack.send("\n".join(report))
@@ -58,7 +58,7 @@ class Runner():
             "_Status_: {}".format(status),
         ]
 
-        if stderr != "":
-            report.append("_Reason_: {}".format(stderr))
+        if stderr and stderr != "":
+            report.append("_Reason_: {}".format(stderr.decode()))
 
         return report
