@@ -58,7 +58,7 @@ class Runner():
             "_Status_: {}".format(status),
         ]
 
-        if stderr != "":
+        if stderr and stderr != "":
             report.append("_Reason_: {}".format(stderr))
 
         return report
