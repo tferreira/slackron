@@ -28,7 +28,8 @@ class Runner():
         process = subprocess.run(
             args=self._cmd_line,
             shell=True,
-            capture_output=True
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE
         )
 
         end_ts = time.time()
