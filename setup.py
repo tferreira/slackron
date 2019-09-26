@@ -18,10 +18,14 @@ setuptools.setup(
     url="https://github.com/tferreira/slackron",
     packages=setuptools.find_packages(),
     install_requires=[
+        "PyYAML==5.1.2",
         "requests==2.22.0"
     ],
     tests_require=_TEST_REQUIRE,
     extras_require={"testing": _TEST_REQUIRE},
+    entry_points = {
+        'console_scripts': ['slackron=slackron.__init__:run'],
+    },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
