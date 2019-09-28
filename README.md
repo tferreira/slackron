@@ -28,6 +28,10 @@ Example:
 */1 * * * * /usr/local/bin/slackron -- wget -Ss https://example.com
 ```
 
+## Messages example
+
+<img src="./images/notifications.png" alt="mattermost notifications template">
+
 ## Support
 
 * [File an Issue](https://github.com/tferreira/slackron/issues/new)
