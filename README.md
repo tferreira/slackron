@@ -2,6 +2,10 @@
 
 **slackron** is a Python wrapper to notify about cronjob execution to **Slack**.
 
+## Disclaimer
+
+This software is currently alpha, and subject to change.
+
 ## Installation
 
 slackron is available on [pypi.org](https://pypi.org/project/slackron/).
@@ -21,5 +25,9 @@ Example:
 ## Usage
 
 ```sh
-*/1 * * * * slackron -- wget -Ss https://example.com
+*/1 * * * * /usr/local/bin/slackron -- wget -Ss https://example.com
 ```
+
+## Support
+
+* [File an Issue](https://github.com/tferreira/slackron/issues/new)
