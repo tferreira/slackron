@@ -12,15 +12,21 @@ class Runner():
     def execute(self):
         results = self.run_command()
 
-        report = self.build_report(
-            start_ts=int(results['start_ts']),
-            end_ts=int(results['end_ts']),
-            status="OK" if results['code'] == 0 else "FAILED",
+        start_date = datetime.utcfromtimestamp(
+            int(results['start_ts'])
+        ).strftime('%Y-%m-%d %H:%M:%S')
+        end_date = datetime.utcfromtimestamp(
+            int(results['end_ts'])
+        ).strftime('%Y-%m-%d %H:%M:%S')
+
+        self._slack.send(
+            command=self._cmd_line_args,
+            status='success' if results['code'] == 0 else 'failure',
+            start_date=start_date,
+            end_date=end_date,
             stdout=results['stdout'],
             stderr=results['stderr']
         )
-
-        self._slack.send("\n".join(report))
 
     def run_command(self):
         start_ts = time.time()
@@ -43,22 +49,3 @@ class Runner():
         }
 
         return results
-
-    def build_report(self, start_ts, end_ts, status,
-                    stdout=None, stderr=None):
-        report = [
-            "**Cron report**",
-            "_Command_: {}".format(self._cmd_line_args),
-            "_Started_: {}".format(
-                datetime.utcfromtimestamp(start_ts).strftime('%Y-%m-%d %H:%M:%S')
-            ),
-            "_Ended_: {}".format(
-                datetime.utcfromtimestamp(end_ts).strftime('%Y-%m-%d %H:%M:%S')
-            ),
-            "_Status_: {}".format(status),
-        ]
-
-        if stderr and stderr != "":
-            report.append("_Reason_: {}".format(stderr.decode()))
-
-        return report
