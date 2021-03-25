@@ -19,7 +19,7 @@ setuptools.setup(
     include_package_data=True,
     packages=setuptools.find_packages(),
     install_requires=[
-        "PyYAML==5.1.2",
+        "PyYAML==5.4",
         "requests==2.22.0"
     ],
     tests_require=_TEST_REQUIRE,
